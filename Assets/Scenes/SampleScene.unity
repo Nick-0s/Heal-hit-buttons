@@ -793,7 +793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2041922825333487069, guid: 442e89f635534ce4fb6c4e64491575a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeHealthValueBy
+      value: HealBy
       objectReference: {fileID: 0}
     - target: {fileID: 2041922825333487069, guid: 442e89f635534ce4fb6c4e64491575a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -809,7 +809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4356053650824831258, guid: 442e89f635534ce4fb6c4e64491575a8, type: 3}
       propertyPath: m_Name
-      value: +HealthButton
+      value: HealButton
       objectReference: {fileID: 0}
     - target: {fileID: 6762944455345214296, guid: 442e89f635534ce4fb6c4e64491575a8, type: 3}
       propertyPath: m_Sprite
@@ -939,6 +939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1287285292}
   - component: {fileID: 1287285291}
+  - component: {fileID: 1287285293}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -958,13 +959,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45060db7bab037d458431dd21559ae17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 680581436}
-  _changeTimeInSeconds: 1
-  _textOfHealth: {fileID: 607611103}
-  _minHealth: 0
-  _maxHealth: 100
-  _lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  _maxHealthColor: {r: 0, g: 0.9245283, b: 0.015579399, a: 1}
+  _healthVisualizer: {fileID: 1287285293}
+  _min: 0
+  _max: 100
 --- !u!4 &1287285292
 Transform:
   m_ObjectHideFlags: 0
@@ -980,6 +977,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1287285293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287285290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c9b8f157a834b4681913efb3f23350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 680581436}
+  _changeTimeInSeconds: 1
+  _textOfHealth: {fileID: 607611103}
+  _lowHealthColor: {r: 0.9528302, g: 0, b: 0, a: 1}
+  _maxHealthColor: {r: 0, g: 0.745283, b: 0.013773054, a: 1}
 --- !u!1 &1419141003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,7 +1162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2041922825333487069, guid: 442e89f635534ce4fb6c4e64491575a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeHealthValueBy
+      value: TakeDamage
       objectReference: {fileID: 0}
     - target: {fileID: 2041922825333487069, guid: 442e89f635534ce4fb6c4e64491575a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1156,7 +1170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2041922825333487069, guid: 442e89f635534ce4fb6c4e64491575a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: -10
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2041922825333487069, guid: 442e89f635534ce4fb6c4e64491575a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1164,7 +1178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4356053650824831258, guid: 442e89f635534ce4fb6c4e64491575a8, type: 3}
       propertyPath: m_Name
-      value: -HealthButton
+      value: DamageButton
       objectReference: {fileID: 0}
     - target: {fileID: 6762944455345214296, guid: 442e89f635534ce4fb6c4e64491575a8, type: 3}
       propertyPath: m_Sprite

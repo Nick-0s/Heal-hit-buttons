@@ -1,57 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private Slider _slider;
-    [SerializeField] private float _changeTimeInSeconds;
-    [SerializeField] private TMP_Text _textOfHealth;
-    [SerializeField] private int _minHealth;
-    [SerializeField] private int _maxHealth;
-    [SerializeField] private Color _lowHealthColor;
-    [SerializeField] private Color _maxHealthColor;
-    private int _currentHealth;
+    [SerializeField] private HealthVisualizer _healthVisualizer;
+    [SerializeField] private int _min;
+    [SerializeField] private int _max;
+    public int Current {get; private set;}
 
     private void Awake()
     {
-        _currentHealth = _maxHealth;
-        _slider.maxValue = _maxHealth;
-        _slider.value = _slider.maxValue;
-        _textOfHealth.text = _currentHealth.ToString();
-        _textOfHealth.color = _maxHealthColor;
+        Current = Max;
     }
 
-    public void ChangeHealthValueBy(int value)
+    public int Max => _max;
+
+    public void HealBy(int value)
     {
-        StartCoroutine(ChangeHealthBy(value));
+        Current = Mathf.Clamp(Current + value, _min, _max);
+
+        _healthVisualizer?.RefreshHealthDisplay();
     }
 
-    private IEnumerator ChangeHealthBy(int value)
+    public void TakeDamage(int value)
     {
-        float changeRate = Mathf.Abs(value / _changeTimeInSeconds);
+        Current = Mathf.Clamp(Current - value, _min, _max);
 
-        _currentHealth = Mathf.Clamp(_currentHealth + value, _minHealth, _maxHealth);
-
-        while (_slider.value != _currentHealth)
-        {
-            ChangeSliderValueWithStep(changeRate * Time.deltaTime);
-            ChangeText();
-
-            yield return null;
-        }
-    }
-
-    private void ChangeSliderValueWithStep(float value)
-    {
-        _slider.value = Mathf.MoveTowards(_slider.value, _currentHealth, value);
-    }
-
-    private void ChangeText()
-    {
-        _textOfHealth.text = ((int)_slider.value).ToString();
-        _textOfHealth.color = Color.Lerp(_lowHealthColor, _maxHealthColor, _slider.normalizedValue);
+        _healthVisualizer?.RefreshHealthDisplay();
     }
 }
