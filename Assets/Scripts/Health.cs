@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private HealthVisualizer _healthVisualizer;
     [SerializeField] private int _min;
     [SerializeField] private int _max;
     public int Current {get; private set;}
@@ -19,14 +18,10 @@ public class Health : MonoBehaviour
     public void HealBy(int value)
     {
         Current = Mathf.Clamp(Current + value, _min, _max);
-
-        _healthVisualizer?.RefreshHealthDisplay();
     }
 
     public void TakeDamage(int value)
     {
         Current = Mathf.Clamp(Current - value, _min, _max);
-
-        _healthVisualizer?.RefreshHealthDisplay();
     }
 }

@@ -14,6 +14,7 @@ public class HealthVisualizer : MonoBehaviour
     [SerializeField] private Color _lowHealthColor;
     [SerializeField] private Color _maxHealthColor;
     private Health _health;
+    private int _lastTargetHealthValue;
     private Coroutine _displayChangeCoroutine;
 
     private void Awake()
@@ -25,7 +26,16 @@ public class HealthVisualizer : MonoBehaviour
         _textOfHealth.color = _maxHealthColor;
     }
 
-    public void RefreshHealthDisplay()
+    private void Update()
+    {
+        if(_health.Current != _lastTargetHealthValue)
+        {
+            _lastTargetHealthValue = _health.Current;            
+            RefreshHealthDisplay();
+        }
+    }
+
+    private void RefreshHealthDisplay()
     {
         StopActiveCoroutine();
         _displayChangeCoroutine = StartCoroutine(SmoothDisplayChange());
@@ -57,7 +67,7 @@ public class HealthVisualizer : MonoBehaviour
 
     private void StopActiveCoroutine()
     {
-        if (_displayChangeCoroutine != null)
+        if(_displayChangeCoroutine != null)
             StopCoroutine(_displayChangeCoroutine);
     }
 }
