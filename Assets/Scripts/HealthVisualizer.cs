@@ -20,19 +20,11 @@ public class HealthVisualizer : MonoBehaviour
     private void Awake()
     {
         _health = GetComponent<Health>();
+        _health.Changed += RefreshHealthDisplay;
         _slider.maxValue = _health.Max;
         _slider.value = _slider.maxValue;
         _textOfHealth.text = _health.Max.ToString();
         _textOfHealth.color = _maxHealthColor;
-    }
-
-    private void Update()
-    {
-        if(_health.Current != _lastTargetHealthValue)
-        {
-            _lastTargetHealthValue = _health.Current;            
-            RefreshHealthDisplay();
-        }
     }
 
     private void RefreshHealthDisplay()
